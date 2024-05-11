@@ -1,5 +1,5 @@
 import React from 'react';
-import SingleVenue from '../components/SingleVenue'; // Adjust the import path as per your file structure
+import SingleVenue from '../components/SingleVenue'; 
 
 const VenueDetailsPage = () => {
   return (

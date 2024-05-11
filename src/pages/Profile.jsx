@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import CreateVenue from '../components/CreateVenue';
 
 const ProfilePage = () => {
@@ -9,7 +10,6 @@ const ProfilePage = () => {
   const [newBio, setNewBio] = useState('');
   const [newAvatarUrl, setNewAvatarUrl] = useState('');
   const [isEditing, setIsEditing] = useState(false);
-  const [isVenueManager, setIsVenueManager] = useState(false);
   const accessToken = localStorage.getItem('accessToken');
   const apiKey = localStorage.getItem('apiKey');
   const username = localStorage.getItem('username');
@@ -38,7 +38,6 @@ const ProfilePage = () => {
         }
         const profileData = await profileResponse.json();
         setProfile(profileData.data);
-        setIsVenueManager(profileData.data.venueManager);
 
         // Fetch bookings
         const bookingsResponse = await fetch(
@@ -107,70 +106,73 @@ const ProfilePage = () => {
 
   if (!profile) {
     return <div>Loading...</div>;
-    
   }
-  
 
   return (
     <div className="max-w-4xl px-4 py-8 mx-auto">
       <h1 className="mb-4 text-3xl font-bold">Profile</h1>
-      <div className="flex items-center mb-6">
-        <div className="w-20 h-20 mr-4 overflow-hidden rounded-full">
-          <img src={profile.avatar.url} alt="Avatar" className="object-cover w-full h-full" />
-        </div>
-        <div>
-          <h3 className="text-lg font-semibold">{profile.name}</h3>
-          {isEditing ? (
-            <input
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
-              value={newAvatarUrl}
-              onChange={(e) => setNewAvatarUrl(e.target.value)}
-              placeholder="Enter new avatar URL"
-            />
-          ) : (
-            <p>{profile.email}</p>
+      
+      {/* Display User Info */}
+      {profile && (
+        <div className="flex items-center mb-6">
+          {profile.avatar && (
+            <div className="w-20 h-20 mr-4 overflow-hidden rounded-full">
+              <img src={profile.avatar.url} alt="Avatar" className="object-cover w-full h-full" />
+            </div>
           )}
+          <div>
+            <h3 className="text-lg font-semibold">{profile.name}</h3>
+            <p>{profile.email}</p>
+            {isEditing ? (
+              <input
+                type="text"
+                value={newAvatarUrl}
+                onChange={(e) => setNewAvatarUrl(e.target.value)}
+                placeholder="Enter new avatar URL"
+                className="block w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+              />
+            ) : (
+              <p>{profile.bio}</p>
+            )}
+            {isEditing && (
+              <textarea
+                value={newBio}
+                onChange={(e) => setNewBio(e.target.value)}
+                placeholder="Enter new bio"
+                className="block w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+              />
+            )}
+          </div>
         </div>
-      </div>
-      <div className="mb-6">
-        <h3 className="mb-2 text-lg font-semibold">Bio</h3>
-        {isEditing ? (
-          <textarea
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
-            value={newBio}
-            onChange={(e) => setNewBio(e.target.value)}
-            placeholder="Enter new bio"
-          />
-        ) : (
-          <p>{profile.bio}</p>
-        )}
-      </div>
-      {isEditing && (
+      )}
+      
+      {/* Edit Profile */}
+      {isEditing ? (
         <>
           <button
-            className="px-4 py-2 mr-2 text-white bg-blue-500 rounded-md"
             onClick={handleUpdate}
             disabled={!newBio || !newAvatarUrl}
+            className="px-4 py-2 mr-2 text-white bg-blue-500 rounded-md"
           >
             Save Changes
           </button>
           <button
-            className="px-4 py-2 ml-2 text-gray-700 bg-gray-300 rounded-md"
             onClick={() => setIsEditing(false)}
+            className="px-4 py-2 ml-2 text-gray-700 bg-gray-300 rounded-md"
           >
             Cancel
           </button>
         </>
-      )}
-      {!isEditing && (
+      ) : (
         <button
-          className="px-4 py-2 text-white bg-blue-500 rounded-md"
           onClick={() => setIsEditing(true)}
+          className="px-4 py-2 text-white bg-blue-500 rounded-md"
         >
           Edit Profile
         </button>
       )}
 
+      {/* Display User Bookings */}
       <h2 className="mt-8 mb-4 text-2xl font-bold">Bookings</h2>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {bookings.map((booking) => (
@@ -190,24 +192,31 @@ const ProfilePage = () => {
         ))}
       </div>
 
+      {/* Display User Venues */}
       <h2 className="mt-8 mb-4 text-2xl font-bold">Venues</h2>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {venues.map((venue) => (
-          <div key={venue.id} className="overflow-hidden bg-white rounded-md shadow-md">
-            <img src={venue.media[0]?.url} alt={venue.name} className="object-cover w-full h-40" />
-            <div className="p-4">
-              <p className="text-lg font-bold">{venue.name}</p>
-              <p>{venue.description}</p>
-              <p>Price: {venue.price}</p>
-              <p>Max Guests: {venue.maxGuests}</p>
-              {/* Add more details as needed */}
+          <Link key={venue.id} to={`/venues/${venue.id}/details`} className="cursor-pointer">
+            <div className="overflow-hidden bg-white rounded-md shadow-md">
+              {venue.media && (
+                <img
+                  src={venue.media[0]?.url}
+                  alt={venue.name}
+                  className="object-cover w-full h-40"
+                />
+              )}
+              <div className="p-4">
+                <p className="text-lg font-bold">{venue.name}</p>
+                <p>{venue.description}</p>
+                <p>Price: {venue.price}</p>
+                <p>Max Guests: {venue.maxGuests}</p>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
-
-      {/* Display if the user is a venue manager */}
-      {isVenueManager && <p>You are a venue manager</p>}
+      
+      {/* Create Venue Button */}
       <CreateVenue accessToken={accessToken} apiKey={apiKey} />
     </div>
   );

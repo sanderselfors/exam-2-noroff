@@ -7,6 +7,12 @@ export default {
   },
   plugins: [daisyui],
   daisyui: {
-    themes: ["light"],
+    themes: [
+      {
+        mytheme: {
+          primary: "#EC1E27",
+        },
+      },
+    ],
   },
 };
