@@ -29,7 +29,7 @@ const SingleVenue = () => {
 
   return (
     <div className="container py-8 mx-auto">
-      <div className="max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-md">
+      <div className="max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl">
         <img src={venue.media[0].url} alt={venue.media[0].alt} className="object-cover object-center w-full h-64" />
         <div className="p-6">
           <h2 className="mb-2 text-3xl font-bold">{venue.name}</h2>

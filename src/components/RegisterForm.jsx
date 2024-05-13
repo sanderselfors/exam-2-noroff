@@ -82,7 +82,7 @@ function RegisterForm() {
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 50 }}
-        className="w-full max-w-xl p-5 m-auto bg-white py-28 rounded-xl"
+        className="w-full max-w-xl p-5 m-auto bg-white shadow-xl rounded-xl py-28"
       >
         <h1 className="text-3xl font-normal text-center text-gray-700">
           Register
@@ -106,7 +106,7 @@ function RegisterForm() {
               placeholder="Name"
               value={formData.name}
               onChange={handleChange}
-              className="block w-full px-4 py-2 mt-2 text-blue-500 bg-white border rounded-md focus:border-blue-500 focus:ring-blue-500 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="block w-full px-4 py-2 mt-2 bg-white border rounded-md text-primary focus:border-primary focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40"
               required
             />
           </div>
@@ -117,7 +117,7 @@ function RegisterForm() {
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
-              className="block w-full px-4 py-2 mt-2 text-blue-500 bg-white border rounded-md focus:border-blue-500 focus:ring-blue-500 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="block w-full px-4 py-2 mt-2 bg-white border rounded-md text-primary focus:border-primary focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40"
               required
             />
           </div>
@@ -128,7 +128,7 @@ function RegisterForm() {
               placeholder="Password"
               value={formData.password}
               onChange={handleChange}
-              className="block w-full px-4 py-2 mt-2 text-blue-500 bg-white border rounded-md focus:border-blue-500 focus:ring-blue-500 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="block w-full px-4 py-2 mt-2 bg-white border rounded-md text-primary focus:border-primary focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40"
               required
             />
           </div>
@@ -153,7 +153,7 @@ function RegisterForm() {
             <button
               type="button"
               onClick={handleRegistration}
-              className="w-full px-4 py-2 tracking-wide text-center text-white transition-colors duration-200 transform bg-blue-500 rounded-xl hover:bg-blue-700 focus:outline-none focus:bg-blue-500"
+              className="w-full px-4 py-2 tracking-wide text-center text-white transition-colors duration-200 transform bg-primary rounded-3xl hover:bg-primary-dark focus:outline-none focus:bg-primary-dark"
               disabled={isLoading}
             >
               {isLoading ? "Registering..." : "Register"}
@@ -164,7 +164,7 @@ function RegisterForm() {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="font-medium text-blue-500 hover:underline"
+            className="font-medium text-primary hover:underline"
           >
             Log in
           </Link>

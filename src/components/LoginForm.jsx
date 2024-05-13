@@ -28,7 +28,7 @@ const LoginPage = () => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("accessToken", data.data.accessToken);
-        localStorage.setItem("username", data.data.name); 
+        localStorage.setItem("username", data.data.name);
 
         // Create API Key
         const apiKeyResponse = await fetch(
@@ -66,12 +66,12 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="relative flex flex-col justify-center min-h-screen p-5 overflow-hidden">
+    <div className="relative flex flex-col justify-center min-h-screen p-5 overflow-hidden ">
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 50 }}
-        className="w-full max-w-xl p-5 m-auto bg-white py-28 rounded-xl"
+        className="w-full max-w-xl p-5 m-auto bg-white shadow-xl py-28 rounded-xl"
       >
         <h1 className="text-3xl font-normal text-center text-gray-700">
           Login
@@ -85,7 +85,7 @@ const LoginPage = () => {
               type="email"
               name="email"
               placeholder="Email"
-              className="block w-full px-4 py-2 mt-2 text-blue-500 bg-white border rounded-md focus:border-blue-500 focus:ring-blue-500 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="block w-full px-4 py-2 mt-2 bg-white border rounded-md text-primary focus:border-primary focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -97,7 +97,7 @@ const LoginPage = () => {
               type="password"
               name="password"
               placeholder="Password"
-              className="block w-full px-4 py-2 mt-2 text-blue-500 bg-white border rounded-md focus:border-blue-500 focus:ring-blue-500 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="block w-full px-4 py-2 mt-2 bg-white border rounded-md text-primary focus:border-primary focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -111,7 +111,7 @@ const LoginPage = () => {
           >
             <button
               type="submit"
-              className={`w-full px-4 py-2 tracking-wide text-center text-white transition-colors duration-200 transform bg-blue-500 rounded-xl hover:bg-blue-700 focus:outline-none focus:bg-blue-500`}
+              className={`w-full px-4 py-2 tracking-wide text-center text-white transition-colors duration-200 transform bg-primary rounded-3xl hover:bg-primary-dark focus:outline-none focus:bg-primary-dark`}
               disabled={isLoading}
             >
               {isLoading ? "Logging in..." : "Log in"}
@@ -120,7 +120,7 @@ const LoginPage = () => {
         </form>
         <a
           href="#"
-          className="flex justify-center pt-10 text-xs text-blue-500 hover:underline"
+          className="flex justify-center pt-10 text-xs text-primary hover:underline"
         >
           Forgot your password?
         </a>
@@ -128,7 +128,7 @@ const LoginPage = () => {
           Don't have an account?{" "}
           <Link
             to="/register"
-            className="font-medium text-blue-500 hover:underline"
+            className="font-medium text-primary hover:underline"
           >
             Sign up
           </Link>

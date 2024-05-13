@@ -42,8 +42,7 @@ const Header = () => {
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">
-          <input type="text" placeholder="Search" className="w-24 input input-bordered md:w-auto" />
-        </div>
+          </div>
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">

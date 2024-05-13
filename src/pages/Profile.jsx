@@ -68,6 +68,15 @@ const ProfilePage = () => {
     fetchData();
   }, [accessToken, apiKey, username]);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };
+
   const handleUpdate = async () => {
     try {
       const options = {
@@ -110,19 +119,19 @@ const ProfilePage = () => {
 
   return (
     <div className="max-w-4xl px-4 py-8 mx-auto">
-      <h1 className="mb-4 text-3xl font-bold">Profile</h1>
+      <h1 className="mb-4 text-3xl font-bold text-center">Profile</h1>
       
       {/* Display User Info */}
       {profile && (
-        <div className="flex items-center mb-6">
+        <div className="flex flex-col items-center mb-6">
           {profile.avatar && (
-            <div className="w-20 h-20 mr-4 overflow-hidden rounded-full">
+            <div className="w-32 h-32 mb-4 overflow-hidden rounded-full">
               <img src={profile.avatar.url} alt="Avatar" className="object-cover w-full h-full" />
             </div>
           )}
-          <div>
-            <h3 className="text-lg font-semibold">{profile.name}</h3>
-            <p>{profile.email}</p>
+          <div className="text-center">
+            <h3 className="text-xl font-semibold">{profile.name}</h3>
+            <p className="mb-2 text-gray-500">{profile.email}</p>
             {isEditing ? (
               <input
                 type="text"
@@ -132,7 +141,7 @@ const ProfilePage = () => {
                 className="block w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
               />
             ) : (
-              <p>{profile.bio}</p>
+              <p className="mb-2">{profile.bio}</p>
             )}
             {isEditing && (
               <textarea
@@ -148,42 +157,42 @@ const ProfilePage = () => {
       
       {/* Edit Profile */}
       {isEditing ? (
-        <>
+        <div className="flex items-center justify-center mb-4 space-x-4">
           <button
             onClick={handleUpdate}
             disabled={!newBio || !newAvatarUrl}
-            className="px-4 py-2 mr-2 text-white bg-blue-500 rounded-md"
+            className="px-6 py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none"
           >
             Save Changes
           </button>
           <button
             onClick={() => setIsEditing(false)}
-            className="px-4 py-2 ml-2 text-gray-700 bg-gray-300 rounded-md"
+            className="px-6 py-3 text-gray-700 bg-gray-300 rounded-md hover:bg-gray-400 focus:outline-none"
           >
             Cancel
           </button>
-        </>
+        </div>
       ) : (
         <button
           onClick={() => setIsEditing(true)}
-          className="px-4 py-2 text-white bg-blue-500 rounded-md"
+          className="flex px-6 py-3 mx-auto text-white rounded-3xl btn btn-primary"
         >
           Edit Profile
         </button>
       )}
 
       {/* Display User Bookings */}
-      <h2 className="mt-8 mb-4 text-2xl font-bold">Bookings</h2>
+      <h2 className="mt-8 mb-4 text-2xl font-bold">My Bookings</h2>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {bookings.map((booking) => (
-          <div key={booking.id} className="overflow-hidden bg-white rounded-md shadow-md">
-            <div className="p-4 bg-gray-200">
+          <div key={booking.id} className="overflow-hidden bg-white shadow-xl rounded-xl">
+            <div className="p-4">
               <p className="text-lg font-bold">Booking Details</p>
-              <p>Date From: {booking.dateFrom}</p>
-              <p>Date To: {booking.dateTo}</p>
+              <p>Date From: {formatDate(booking.dateFrom)}</p>
+              <p>Date To: {formatDate(booking.dateTo)}</p>
               <p>Guests: {booking.guests}</p>
-              <p>Created: {booking.created}</p>
-              <p>Updated: {booking.updated}</p>
+              <p>Created: {formatDate(booking.created)}</p>
+              <p>Updated: {formatDate(booking.updated)}</p>
             </div>
             {booking.media && (
               <img src={booking.media[0]?.url} alt={booking.id} className="object-cover w-full h-40" />
@@ -193,11 +202,11 @@ const ProfilePage = () => {
       </div>
 
       {/* Display User Venues */}
-      <h2 className="mt-8 mb-4 text-2xl font-bold">Venues</h2>
+      <h2 className="mt-8 mb-4 text-2xl font-bold">My Venues</h2>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {venues.map((venue) => (
           <Link key={venue.id} to={`/venues/${venue.id}/details`} className="cursor-pointer">
-            <div className="overflow-hidden bg-white rounded-md shadow-md">
+            <div className="overflow-hidden bg-white shadow-xl rounded-xl">
               {venue.media && (
                 <img
                   src={venue.media[0]?.url}

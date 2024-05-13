@@ -127,7 +127,7 @@ const BookingForm = ({ venueId }) => {
             onChange={handleGuestsChange}
           />
         </label>
-        <button type="submit" className="mt-3 btn btn-primary">Book Venue</button>
+        <button type="submit" className="mt-3 text-white btn btn-primary rounded-3xl">Book Venue</button>
       </form>
     </div>
   );
