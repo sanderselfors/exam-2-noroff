@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { useParams } from 'react-router-dom';
-import BookingForm from './BookingForm'; 
+import BookingForm from './BookingForm';
 
 const SingleVenue = () => {
   const { id } = useParams();
@@ -28,9 +29,27 @@ const SingleVenue = () => {
   }
 
   return (
-    <div className="container py-8 mx-auto">
-      <div className="max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl">
-        <img src={venue.media[0].url} alt={venue.media[0].alt} className="object-cover object-center w-full h-64" />
+    <motion.div 
+      className="container px-4 py-8 mx-auto"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div 
+        className="max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
+        <motion.img 
+          src={venue.media[0].url} 
+          alt={venue.media[0].alt} 
+          className="object-cover object-center w-full h-64"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+        />
         <div className="p-6">
           <h2 className="mb-2 text-3xl font-bold">{venue.name}</h2>
           <p className="mb-4 text-gray-600">{venue.description}</p>
@@ -64,8 +83,8 @@ const SingleVenue = () => {
             <BookingForm venueId={id} />
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

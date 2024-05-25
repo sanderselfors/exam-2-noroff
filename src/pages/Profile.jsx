@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CreateVenue from '../components/CreateVenue';
+import { motion } from 'framer-motion';
 
 const ProfilePage = () => {
   const [profile, setProfile] = useState(null);
@@ -109,6 +110,20 @@ const ProfilePage = () => {
     }
   };
 
+  if (!accessToken || !apiKey || !username) {
+    return (
+      <div className="flex items-center justify-center w-full h-screen p-4">
+        <div className="p-4 text-center rounded-md shadow-md">
+          <h1 className="mb-4 text-3xl font-bold">Welcome to Holidaze!</h1>
+          <p className="mb-4 text-lg">You need to be logged in to view your profile.</p>
+          <Link to="/login" className="flex px-6 py-3 mx-auto text-white w-60 rounded-3xl btn btn-primary">
+            Go to Login
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   if (error) {
     return <div>An error occurred: {error}</div>;
   }
@@ -123,11 +138,21 @@ const ProfilePage = () => {
       
       {/* Display User Info */}
       {profile && (
-        <div className="flex flex-col items-center mb-6">
+        <motion.div 
+          className="flex flex-col items-center mb-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           {profile.avatar && (
-            <div className="w-32 h-32 mb-4 overflow-hidden rounded-full">
+            <motion.div 
+              className="w-32 h-32 mb-4 overflow-hidden rounded-full"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
               <img src={profile.avatar.url} alt="Avatar" className="object-cover w-full h-full" />
-            </div>
+            </motion.div>
           )}
           <div className="text-center">
             <h3 className="text-xl font-semibold">{profile.name}</h3>
@@ -138,7 +163,7 @@ const ProfilePage = () => {
                 value={newAvatarUrl}
                 onChange={(e) => setNewAvatarUrl(e.target.value)}
                 placeholder="Enter new avatar URL"
-                className="block w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+                className="block w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring focus:ring-gray-400"
               />
             ) : (
               <p className="mb-2">{profile.bio}</p>
@@ -148,16 +173,21 @@ const ProfilePage = () => {
                 value={newBio}
                 onChange={(e) => setNewBio(e.target.value)}
                 placeholder="Enter new bio"
-                className="block w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+                className="block w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring focus:ring-gray-400"
               />
             )}
           </div>
-        </div>
+        </motion.div>
       )}
       
       {/* Edit Profile */}
       {isEditing ? (
-        <div className="flex items-center justify-center mb-4 space-x-4">
+        <motion.div 
+          className="flex items-center justify-center mb-4 space-x-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <button
             onClick={handleUpdate}
             disabled={!newBio || !newAvatarUrl}
@@ -171,59 +201,88 @@ const ProfilePage = () => {
           >
             Cancel
           </button>
-        </div>
+        </motion.div>
       ) : (
-        <button
+        <motion.button
           onClick={() => setIsEditing(true)}
           className="flex px-6 py-3 mx-auto text-white rounded-3xl btn btn-primary"
+          initial={{ scale: 0.8 }}
+          animate={{ scale: 1 }}
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.3 }}
         >
           Edit Profile
-        </button>
+        </motion.button>
       )}
 
       {/* Display User Bookings */}
       <h2 className="mt-8 mb-4 text-2xl font-bold">My Bookings</h2>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {bookings.map((booking) => (
-          <div key={booking.id} className="overflow-hidden bg-white shadow-xl rounded-xl">
-            <div className="p-4">
-              <p className="text-lg font-bold">Booking Details</p>
-              <p>Date From: {formatDate(booking.dateFrom)}</p>
-              <p>Date To: {formatDate(booking.dateTo)}</p>
-              <p>Guests: {booking.guests}</p>
-              <p>Created: {formatDate(booking.created)}</p>
-              <p>Updated: {formatDate(booking.updated)}</p>
-            </div>
-            {booking.media && (
-              <img src={booking.media[0]?.url} alt={booking.id} className="object-cover w-full h-40" />
-            )}
-          </div>
-        ))}
-      </div>
+      {bookings.length === 0 ? (
+        <p className="text-center">You have no bookings yet.</p>
+      ) : (
+        <motion.div 
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          {bookings.map((booking) => (
+            <motion.div 
+              key={booking.id} 
+              className="overflow-hidden bg-white shadow-xl rounded-xl"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="p-4">
+                <p className="text-lg font-bold">Booking Details</p>
+                <p>Date From: {formatDate(booking.dateFrom)}</p>
+                <p>Date To: {formatDate(booking.dateTo)}</p>
+                <p>Guests: {booking.guests}</p>
+                <p>Created: {formatDate(booking.created)}</p>
+                <p>Updated: {formatDate(booking.updated)}</p>
+              </div>
+              {booking.media && (
+                <img src={booking.media[0]?.url} alt={booking.id} className="object-cover w-full h-40" />
+              )}
+            </motion.div>
+          ))}
+        </motion.div>
+      )}
 
       {/* Display User Venues */}
       <h2 className="mt-8 mb-4 text-2xl font-bold">My Venues</h2>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {venues.map((venue) => (
-          <Link key={venue.id} to={`/venues/${venue.id}/details`} className="cursor-pointer">
-            <div className="overflow-hidden bg-white shadow-xl rounded-xl">
-              {venue.media && (
-                <img
-                  src={venue.media[0]?.url}
-                  alt={venue.name}
-                  className="object-cover w-full h-40"
-                />
-              )}
-              <div className="p-4">
-                <p className="text-lg font-bold">{venue.name}</p>
-                <p>{venue.description}</p>
-                <p>Price: {venue.price}</p>
-                <p>Max Guests: {venue.maxGuests}</p>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
+      {venues.length === 0 ? (
+        <p className="text-center">You have no venues yet.</p>
+      ) : (
+        <motion.div 
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          {venues.map((venue) => (
+            <Link key={venue.id} to={`/venues/${venue.id}/details`} className="cursor-pointer">
+              <motion.div 
+                className="overflow-hidden bg-white shadow-xl rounded-xl"
+                whileHover={{ scale: 1.05 }}
+              >
+                {venue.media && (
+                  <img
+                    src={venue.media[0]?.url}
+                    alt={venue.name}
+                    className="object-cover w-full h-40"
+                  />
+                )}
+                <div className="p-4">
+                  <p className="text-lg font-bold">{venue.name}</p>
+                  <p>{venue.description}</p>
+                  <p>Price: {venue.price}</p>
+                  <p>Max Guests: {venue.maxGuests}</p>
+                </div>
+              </motion.div>
+            </Link>
+          ))}
+        </motion.div>
+      )}
       
       {/* Create Venue Button */}
       <CreateVenue accessToken={accessToken} apiKey={apiKey} />

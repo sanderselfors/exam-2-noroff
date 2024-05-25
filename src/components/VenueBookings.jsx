@@ -28,7 +28,7 @@ const VenueBookings = ({ venueId }) => {
   }
 
   return (
-    <div>
+    <div className="max-w-4xl p-4 mx-auto mt-4 overflow-hidden shadow-xl rounded-xl">
       <h3 className="mb-4 text-lg font-semibold">Bookings for this venue:</h3>
       {bookings.length === 0 ? (
         <p>No bookings yet.</p>

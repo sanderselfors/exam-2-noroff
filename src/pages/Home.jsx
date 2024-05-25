@@ -14,26 +14,28 @@ const HomePage = () => {
     <div>
       {/* Hero Section */}
       <div className="relative h-screen overflow-hidden bg-white">
-        {/* Wave-like Background */}
-        <div className="absolute inset-x-0 bottom-0 ">
-          <svg
-            className="w-full h-100vh text-primary"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 1440 320"
-          >
-            <path fillOpacity="1" d="M0,96L60,128C120,160,240,224,360,240C480,256,600,224,720,192C840,160,960,128,1080,122.7C1200,117,1320,139,1380,149.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
-          </svg>
-        </div>
-        <div className="container flex flex-col items-center justify-center h-full mx-auto text-center">
-          <h1 className="mb-4 text-5xl font-bold">
-            <span className="text-black">Welcome to </span>
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          className="absolute inset-0 object-cover w-full h-full"
+        >
+          <source src="https://videos.pexels.com/video-files/7533207/7533207-uhd_3840_2160_30fps.mp4" type="video/mp4" />
+        </video>
+        
+        
+        
+        {/* Overlay to Darken the Video */}
+        <div className="absolute inset-0 bg-black opacity-10"></div>
+
+        <div className="container relative z-10 flex flex-col items-center justify-center h-full mx-auto text-center">
+          <h1 className="mb-4 text-5xl font-bold text-white md:text-6xl lg:text-7xl">
+            <span className="block">Welcome to </span>
             <span className="text-primary">Holidaze!</span>
           </h1>
-          <p className="text-lg">Find your perfect holiday accommodation.</p>
-          <button className="px-6 py-3 mt-8 font-bold text-white rounded-full bg-primary hover:bg-primary-light focus:outline-none focus:ring-2 focus:ring-primary-light">
-            Get Started
-          </button>
+          <p className="text-lg text-white md:text-2xl lg:text-3xl">Find your perfect holiday accommodation.</p>
+          
         </div>
       </div>
 

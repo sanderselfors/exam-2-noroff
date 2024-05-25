@@ -84,10 +84,10 @@ const CreateVenue = ({ accessToken, apiKey }) => {
   };
 
   return (
-    <div className="max-w-lg mx-auto">
+    <div className="w-full pt-8">
       <h2 className="mb-4 text-2xl font-bold">Create Venue</h2>
       {error && <div className="text-red-500">{error}</div>}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="p-4 space-y-4 shadow-xl rounded-xl">
         <div>
           <label htmlFor="venueName" className="block mb-1 font-semibold">Venue Name</label>
           <input
@@ -95,7 +95,7 @@ const CreateVenue = ({ accessToken, apiKey }) => {
             id="venueName"
             value={venueName}
             onChange={(e) => setVenueName(e.target.value)}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
             required
           />
         </div>
@@ -105,7 +105,7 @@ const CreateVenue = ({ accessToken, apiKey }) => {
             id="venueDescription"
             value={venueDescription}
             onChange={(e) => setVenueDescription(e.target.value)}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
             required
           />
         </div>
@@ -117,7 +117,7 @@ const CreateVenue = ({ accessToken, apiKey }) => {
               id="venuePrice"
               value={venuePrice}
               onChange={(e) => setVenuePrice(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
               required
             />
           </div>
@@ -128,7 +128,7 @@ const CreateVenue = ({ accessToken, apiKey }) => {
               id="maxGuests"
               value={maxGuests}
               onChange={(e) => setMaxGuests(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
               required
             />
           </div>
@@ -140,7 +140,7 @@ const CreateVenue = ({ accessToken, apiKey }) => {
             id="imageUrl"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
             required
           />
         </div>
@@ -151,7 +151,7 @@ const CreateVenue = ({ accessToken, apiKey }) => {
             id="address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
             required
           />
         </div>
@@ -163,7 +163,7 @@ const CreateVenue = ({ accessToken, apiKey }) => {
               id="city"
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
               required
             />
           </div>
@@ -174,7 +174,7 @@ const CreateVenue = ({ accessToken, apiKey }) => {
               id="zipCode"
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
               required
             />
           </div>
@@ -187,7 +187,7 @@ const CreateVenue = ({ accessToken, apiKey }) => {
               id="country"
               value={country}
               onChange={(e) => setCountry(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
               required
             />
           </div>
@@ -198,12 +198,12 @@ const CreateVenue = ({ accessToken, apiKey }) => {
               id="continent"
               value={continent}
               onChange={(e) => setContinent(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
               required
             />
           </div>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex flex-wrap items-center space-x-4 ">
           <label className="flex items-center space-x-2 cursor-pointer">
             <input
               type="checkbox"
@@ -243,7 +243,7 @@ const CreateVenue = ({ accessToken, apiKey }) => {
         </div>
         <button
           type="submit"
-          className="block w-full px-4 py-2 mt-4 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+          className="block w-full px-4 py-2 mt-4 text-white btn btn-primary rounded-3xl"
         >
           Create Venue
         </button>

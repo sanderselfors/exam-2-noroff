@@ -122,8 +122,8 @@ const VenueDetails = () => {
 
 
   return (
-    <div className="container py-8 mx-auto">
-      <div className="max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-md">
+    <div className="container p-4 py-8 mx-auto">
+      <div className="max-w-4xl mx-auto overflow-hidden bg-white shadow-xl rounded-xl">
         <img src={venue.media[0].url} alt={venue.media[0].alt} className="object-cover object-center w-full h-64" />
         <div className="p-6">
           <h2 className="mb-2 text-3xl font-bold">{venue.name}</h2>
@@ -137,7 +137,7 @@ const VenueDetails = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleFormChange}
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
                 />
               </div>
               <div className="mb-4">
@@ -147,7 +147,7 @@ const VenueDetails = () => {
                   name="description"
                   value={formData.description}
                   onChange={handleFormChange}
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
                 />
               </div>
               <div className="mb-4">
@@ -158,7 +158,7 @@ const VenueDetails = () => {
                   name="price"
                   value={formData.price}
                   onChange={handleFormChange}
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
                 />
               </div>
               <div className="mb-4">
@@ -169,7 +169,7 @@ const VenueDetails = () => {
                   name="maxGuests"
                   value={formData.maxGuests}
                   onChange={handleFormChange}
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
                 />
               </div>
               
@@ -182,7 +182,7 @@ const VenueDetails = () => {
                   name="location.address"
                   value={formData.location.address || ''} // Default value for nested field
                   onChange={handleFormChange}
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4 mb-4">
@@ -194,7 +194,7 @@ const VenueDetails = () => {
                     name="location.city"
                     value={formData.location.city || ''} // Default value for nested field
                     onChange={handleFormChange}
-                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
                   />
                 </div>
                 <div>
@@ -205,7 +205,7 @@ const VenueDetails = () => {
                     name="location.country"
                     value={formData.location.country || ''} // Default value for nested field
                     onChange={handleFormChange}
-                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary"
                   />
                 </div>
               </div>
@@ -250,10 +250,10 @@ const VenueDetails = () => {
                 </label>
               </div>
               <div className="flex items-center space-x-4">
-                <button type="submit" className="px-4 py-2 mr-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                <button type="submit" className="px-4 py-2 mr-2 text-white btn btn-primary rounded-3xl">
                   Save Changes
                 </button>
-                <button type="button" onClick={handleCancelEdit} className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:bg-gray-300">
+                <button type="button" onClick={handleCancelEdit} className="px-4 py-2 text-gray-700 bg-gray-200 rounded-3xl hover:bg-gray-300 focus:outline-none focus:bg-gray-300">
                   Cancel
                 </button>
               </div>
@@ -287,10 +287,10 @@ const VenueDetails = () => {
               </div>
               <div className="mt-4">
                 <div className="flex items-center">
-                  <button onClick={handleEditClick} className="px-4 py-2 mr-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                  <button onClick={handleEditClick} className="px-4 py-2 mr-2 text-white btn btn-primary rounded-3xl">
                     Edit Venue
                   </button>
-                  <button onClick={() => setDeleteConfirmation(true)} className="px-4 py-2 text-white bg-red-500 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600">
+                  <button onClick={() => setDeleteConfirmation(true)} className="px-4 py-2 text-gray-700 bg-gray-200 rounded-3xl hover:bg-gray-300 focus:outline-none focus:bg-gray-300">
                     Delete Venue
                   </button>
                 </div>
