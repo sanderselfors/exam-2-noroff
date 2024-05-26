@@ -26,8 +26,11 @@ const AllVenues = ({ onVenueClick }) => {
         const data = await response.json();
         console.log('Fetched venues data:', data); // Log the fetched data to inspect
 
-        setVenues(data.data); // Set venues directly without sorting
-        setVisibleVenues(data.data.slice(0, venuesPerPage));
+        // Filter out venues without images
+        const venuesWithImages = data.data.filter((venue) => venue.media.length > 0);
+
+        setVenues(venuesWithImages); // Set venues directly without sorting
+        setVisibleVenues(venuesWithImages.slice(0, venuesPerPage));
         setLoading(false);
       } catch (error) {
         console.error('Error fetching venues:', error); // Log any errors that occur

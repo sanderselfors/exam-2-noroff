@@ -34,7 +34,7 @@ const SingleVenue = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.3 }}
     >
       <motion.div 
         className="max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl"
@@ -46,21 +46,52 @@ const SingleVenue = () => {
           src={venue.media[0].url} 
           alt={venue.media[0].alt} 
           className="object-cover object-center w-full h-64"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
+          initial={{ opacity: 0, scale: 1.2 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4, duration: 0.7 }}
         />
         <div className="p-6">
           <h2 className="mb-2 text-3xl font-bold">{venue.name}</h2>
-          <p className="mb-4 text-gray-600">{venue.description}</p>
+          <motion.p 
+            className="mb-4 text-gray-600"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+          >
+            {venue.description}
+          </motion.p>
           <div className="flex items-center">
-            <span className="text-gray-700">Price: ${venue.price}/night</span>
-            <span className="ml-auto text-gray-700">Max Guests: {venue.maxGuests}</span>
+            <motion.span 
+              className="text-gray-700"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+            >
+              Price: ${venue.price}/night
+            </motion.span>
+            <motion.span 
+              className="ml-auto text-gray-700"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+            >
+              Max Guests: {venue.maxGuests}
+            </motion.span>
           </div>
-          <div className="mt-4">
+          <motion.div 
+            className="mt-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.5 }}
+          >
             <span className="text-gray-700">Location: {venue.location.city}, {venue.location.country}</span>
-          </div>
-          <div className="mt-4">
+          </motion.div>
+          <motion.div 
+            className="mt-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.5 }}
+          >
             <h3 className="mb-2 text-xl font-semibold">Amenities:</h3>
             <ul className="grid grid-cols-2 gap-4">
               {Object.entries(venue.meta).map(([amenity, value]) => (
@@ -76,12 +107,17 @@ const SingleVenue = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
           {/* Include the BookingForm component */}
-          <div className="mt-4">
+          <motion.div 
+            className="mt-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.4, duration: 0.5 }}
+          >
             <h3 className="mb-2 text-xl font-semibold">Book this Venue:</h3>
             <BookingForm venueId={id} />
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </motion.div>

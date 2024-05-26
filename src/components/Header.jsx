@@ -5,6 +5,7 @@ import logoImg from '../assets/logohorizontalred.png';
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('accessToken') !== null);
   const [avatarUrl, setAvatarUrl] = useState(localStorage.getItem('avatarUrl') || 'https://villagesonmacarthur.com/wp-content/uploads/2020/12/Blank-Avatar.png');
+  const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
 
   useEffect(() => {
     const fetchAvatarUrl = async () => {
@@ -42,8 +43,17 @@ const Header = () => {
   }, [isLoggedIn]);
 
   const handleLogout = () => {
+    setShowLogoutConfirmation(true);
+  };
+
+  const confirmLogout = () => {
     localStorage.clear();
     setIsLoggedIn(false);
+    setShowLogoutConfirmation(false);
+  };
+
+  const cancelLogout = () => {
+    setShowLogoutConfirmation(false);
   };
 
   return (
@@ -86,6 +96,19 @@ const Header = () => {
           </ul>
         </div>
       </div>
+
+      {/* Logout Confirmation Modal */}
+      {showLogoutConfirmation && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+          <div className="p-8 bg-white rounded-lg">
+            <p className="mb-4 text-lg">Are you sure you want to log out?</p>
+            <div className="flex justify-center">
+              <button className="px-4 py-2 mr-4 text-white bg-red-600 rounded-3xl" onClick={confirmLogout}>Yes, Log out</button>
+              <button className="px-4 py-2 text-gray-800 bg-gray-300 rounded-3xl" onClick={cancelLogout}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -191,13 +191,13 @@ const ProfilePage = () => {
           <button
             onClick={handleUpdate}
             disabled={!newBio || !newAvatarUrl}
-            className="px-6 py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none"
+            className="px-6 py-3 text-white bg-red-600 rounded-3xl hover:bg-red-700 focus:outline-none"
           >
             Save Changes
           </button>
           <button
             onClick={() => setIsEditing(false)}
-            className="px-6 py-3 text-gray-700 bg-gray-300 rounded-md hover:bg-gray-400 focus:outline-none"
+            className="px-6 py-3 text-gray-700 bg-gray-300 rounded-3xl hover:bg-gray-400 focus:outline-none"
           >
             Cancel
           </button>

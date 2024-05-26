@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import Calendar from '@demark-pro/react-booking-calendar';
 
 const BookingForm = ({ venueId }) => {
@@ -42,11 +43,14 @@ const BookingForm = ({ venueId }) => {
     });
   };
 
-  const handleGuestsChange = (e) => {
-    setFormData({
-      ...formData,
-      guests: parseInt(e.target.value), 
-    });
+  const handleGuestsChange = (change) => {
+    const newGuests = formData.guests + change;
+    if (newGuests >= 1) {
+      setFormData({
+        ...formData,
+        guests: newGuests,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -107,28 +111,31 @@ const BookingForm = ({ venueId }) => {
   }));
 
   return (
-    <div className="container">
-      <h2 className="mt-5 mb-4">Book Venue</h2>
-      {successMessage && <div className="text-green-500">{successMessage}</div>}
-      {errorMessage && <div className="text-red-500">{errorMessage}</div>}
-      <form onSubmit={handleSubmit}>
-        <Calendar
-          selected={[formData.startDate, formData.endDate]}
-          onChange={handleChange}
-          reserved={reserved}
-          range={true}
-        />
-        <label>
-          Guests:
+    <div className="container flex flex-col items-center justify-center">
+      {successMessage && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="text-green-500">{successMessage}</motion.div>}
+      {errorMessage && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="text-red-500">{errorMessage}</motion.div>}
+      <Calendar
+        selected={[formData.startDate, formData.endDate]}
+        onChange={handleChange}
+        reserved={reserved}
+        range={true}
+        className="mt-4"
+      />
+      <motion.form initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} onSubmit={handleSubmit} className="flex items-center justify-center mt-4">
+        <div className="flex items-center">
+          <button type="button" onClick={() => handleGuestsChange(-1)} className="px-3 py-1 text-2xl bg-gray-200 rounded-full hover:bg-gray-300">-</button>
           <input
             type="number"
             name="guests"
             value={formData.guests}
-            onChange={handleGuestsChange}
+            onChange={() => {}}
+            className="block w-16 mx-2 mt-1 text-center border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            readOnly
           />
-        </label>
-        <button type="submit" className="mt-3 text-white btn btn-primary rounded-3xl">Book Venue</button>
-      </form>
+          <button type="button" onClick={() => handleGuestsChange(1)} className="px-3 py-1 text-2xl bg-gray-200 rounded-full hover:bg-gray-300">+</button>
+        </div>
+        <button type="submit" className="ml-4 text-white btn btn-primary rounded-3xl">Book Venue</button>
+      </motion.form>
     </div>
   );
 };
