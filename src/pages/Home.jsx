@@ -24,7 +24,7 @@ const HomePage = () => {
           className="relative flex items-center justify-center w-full mx-auto overflow-hidden bg-center bg-cover shadow-xl rounded-xl"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
-            height: '50vh', // Adjust as needed
+            height: '50vh',
           }}
           initial={{ opacity: 0, scale: 1.2 }}
           animate={{ opacity: 1, scale: 1 }}

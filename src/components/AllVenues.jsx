@@ -24,7 +24,7 @@ const AllVenues = ({ onVenueClick }) => {
         }
 
         const data = await response.json();
-        console.log('Fetched venues data:', data); // Log the fetched data to inspect
+        console.log('Fetched venues data:', data); 
 
         // Filter out venues without images
         const venuesWithImages = data.data.filter((venue) => venue.media.length > 0);
@@ -33,7 +33,7 @@ const AllVenues = ({ onVenueClick }) => {
         setVisibleVenues(venuesWithImages.slice(0, venuesPerPage));
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching venues:', error); // Log any errors that occur
+        console.error('Error fetching venues:', error); 
         setError(error);
         setLoading(false);
       }

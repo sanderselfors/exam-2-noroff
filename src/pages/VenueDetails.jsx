@@ -96,7 +96,7 @@ const VenueDetails = () => {
       
       // Ensure price is a number
       updatableFormData.price = Number(updatableFormData.price);
-      console.log("Payload being sent to the API:", updatableFormData); // Debugging log
+      console.log("Payload being sent to the API:", updatableFormData); 
 
       const options = {
         method: 'PUT',
@@ -110,7 +110,7 @@ const VenueDetails = () => {
       const response = await fetch(`https://v2.api.noroff.dev/holidaze/venues/${venueId}`, options);
       if (!response.ok) {
         const errorResponse = await response.json();
-        console.error("Error response from the API:", errorResponse); // Debugging log
+        console.error("Error response from the API:", errorResponse);
         throw new Error(`Failed to update venue: ${response.statusText}`);
       }
       // Reload the venue data after successful update
