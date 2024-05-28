@@ -121,6 +121,7 @@ const BookingForm = ({ venueId }) => {
         range={true}
         className="mt-4"
       />
+      <h1 className="pt-5">Guests:</h1>
       <motion.form initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} onSubmit={handleSubmit} className="flex items-center justify-center mt-4">
         <div className="flex items-center">
           <button type="button" onClick={() => handleGuestsChange(-1)} className="px-3 py-1 text-2xl bg-gray-200 rounded-full hover:bg-gray-300">-</button>

@@ -52,7 +52,7 @@ const VenueSearch = ({ onVenueClick }) => {
         value={query}
         onChange={handleChange}
         placeholder="Search venues by name or description"
-        className="p-2 border rounded-md border-primary focus:outline-none focus:ring-2 focus:ring-primary"
+        className="p-2 border rounded-3xl border-primary focus:outline-none focus:ring-2 focus:ring-primary"
         style={{ width: '100%', maxWidth: '500px' }}
       />
 
