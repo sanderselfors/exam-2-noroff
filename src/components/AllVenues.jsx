@@ -78,7 +78,7 @@ const AllVenues = ({ onVenueClick }) => {
                     {Object.entries(venue.meta).map(([tag, value]) => (
                       <div
                         key={tag}
-                        className={`badge badge-outline ${value ? 'badge-primary' : 'badge-secondary'} mr-2 mb-2`}
+                        className={`badge badge-outline ${value ? 'badge-secondary' : 'badge-primary'} mr-2 mb-2`}
                       >
                         {tag}
                       </div>
